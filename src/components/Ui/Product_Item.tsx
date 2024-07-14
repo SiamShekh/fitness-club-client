@@ -6,7 +6,7 @@ const Product_Item = () => {
                 <p className="text-xl font-roboto font-medium text-black text-center">Lorem, ipsum dolor.</p>
                 <p className="text-xs opacity-75 text-black font-roboto font-medium text-center">Rating: 4.4</p>
                 <p className="text-2xl my-5 font-roboto font-medium text-black text-center">$99</p>
-                <p className="px-7 py-2 text-black font-poppin text-xl border-2 border-black text-center">Add to cart</p>
+                <p className="px-7 py-2 text-black font-poppin text-xl border-2 border-black text-center">View Details</p>
 
             </div>
         </div>

@@ -1,5 +1,5 @@
 import dumbbells from "../assets/image/dumbbells.webp";
-import man_holding_dumbells from "../assets/image/man_holding_dumbells.webp";
+import dumbbells_3d from "../assets/image/dumbbells_3d icon.webp";
 import cube_icon from "../assets/icon/cube_icon.png";
 import dumbbells_image from "../assets/image/dumbbells_image.png";
 import cxercise_bike from "../assets/image/cxercise_bike.webp";
@@ -121,7 +121,7 @@ const Home = () => {
 
             {/* Image Gallery */}
             <div className="mt-10 max-w-[1200px] mx-auto z-0 relative lg:h-[85vh] h-[50vh] ">
-                <div className="h-[20%]">
+                <div className="h-fit">
                     <p className="text-3xl font-roboto font-bold text-center text-black">Image Gallery</p>
                     <p className="text-xs font-roboto font-light text-center text-black">Explore our wide range of fitness equipment and accessories.</p>
                 </div>
@@ -147,7 +147,7 @@ const Home = () => {
             {/* Benefit Image */}
 
             <div className="z-10 relative mt-28 lg:mt-0">
-                <div className="max-w-[1200px] md:h-screen mx-auto flex items-center justify-between flex-col md:flex-row ">
+                <div className="max-w-[1200px] md:h-[85vh] mx-auto flex items-center justify-between flex-col md:flex-row ">
                     <div className="flex-1 flex flex-col justify-center z-10">
                         <p className="text-center lg:text-start">
                             <span className="text-[#000] lg:text-7xl font-bold text-3xl font-teko">Why need to do exercise</span>
@@ -161,7 +161,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="flex-1">
-                        <img src={man_holding_dumbells} className="w-screen" />
+                        <img src={dumbbells_3d} className="w-[70%] mx-auto" />
                     </div>
                 </div>
             </div>
