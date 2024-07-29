@@ -4,11 +4,13 @@ import Home from "../pages/Home";
 import Product from "../pages/Product";
 import Product_Details from "../pages/Product_Details";
 import Checkouts from "../pages/Checkouts";
+import ProductMangement from "../pages/ProductMangement";
+import DraftProduct_Details from "../pages/DraftProduct_Details";
 
 const MainRoutes = createBrowserRouter([
     {
         path: '/',
-        element: <MainLayout />,
+        element: <MainLayout isFooter={true} />,
         children: [
             {
                 index: true,
@@ -25,6 +27,20 @@ const MainRoutes = createBrowserRouter([
             {
                 path: 'checkout',
                 element: <Checkouts />
+            }
+        ],
+    },
+    {
+        path: '/manegement',
+        element: <MainLayout isFooter={false} />,
+        children: [
+            {
+                index: true,
+                element: <ProductMangement />
+            },
+            {
+                path: 'draft',
+                element: <DraftProduct_Details />
             }
         ]
     }
