@@ -22,9 +22,19 @@ const ReduxCreateProductSlice = createSlice({
             state.stock = action.payload.stock;
             state.thumnail = action.payload.thumnail;
             state.image = action.payload.image;
+        },
+        deleteProducts: (state) => {
+            state.name = "";
+            state.price = "";
+            state.category = "";
+            state.description = "";
+            state.discount = "";
+            state.stock = 0;
+            state.thumnail = "";
+            state.image = [];
         }
     }
 });
 
 export default ReduxCreateProductSlice.reducer;
-export const { createProducts } = ReduxCreateProductSlice.actions;
+export const { createProducts, deleteProducts } = ReduxCreateProductSlice.actions;

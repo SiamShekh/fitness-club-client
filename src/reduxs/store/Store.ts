@@ -9,6 +9,7 @@ import {
     REGISTER,
 } from "redux-persist";
 import CreateProductSlice from "../slice/CreateProductSlice";
+import { BaseApi } from "../api/BaseApi";
 
 const persistConfig = {
     key: "root",
@@ -19,13 +20,14 @@ const persistedReducer = persistReducer(persistConfig, CreateProductSlice);
 
 export const ReduxStore = configureStore({
     reducer: {
-        "persistedProduct": persistedReducer
+        "persistedProduct": persistedReducer,
+        [BaseApi.reducerPath]: BaseApi.reducer
     },
     middleware: (getDefaultMiddlewars) => getDefaultMiddlewars({
         serializableCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         }
-    })
+    }).concat(BaseApi.middleware)
 });
 
 export const persistor = persistStore(ReduxStore);

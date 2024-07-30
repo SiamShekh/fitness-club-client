@@ -1,11 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppRoot } from "../reduxs/store/Store";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import { useAddProductsMutation } from "../reduxs/api/ProductEndpoints";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import Toastify from "../utils/Toastify";
+import { deleteProducts } from "../reduxs/slice/CreateProductSlice";
 const DraftProduct_Details = () => {
     const ReduxProducts = useSelector((state: AppRoot) => state.persistedProduct);
-    
     const images = [];
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     for (let index = 0; index < ReduxProducts.image.length; index++) {
         const element = ReduxProducts.image[index];
         images.push({
@@ -13,7 +20,14 @@ const DraftProduct_Details = () => {
             thumbnail: element
         })
     }
-    console.log(images);
+
+    const [AddProductTrigger] = useAddProductsMutation();
+
+    const AddNewProducts = async () => {
+        await AddProductTrigger(ReduxProducts);
+        await dispatch(deleteProducts(undefined));
+        navigate('/manegement', { replace: true });
+    }
 
     return (
         <div className="max-w-[1200px] mx-auto my-10 p-5 relative">
@@ -49,13 +63,13 @@ const DraftProduct_Details = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-black p-2 w-full text-white mt-5 cursor-pointer">
+                    <div className="bg-black p-2 w-full text-white mt-5 cursor-pointer" onClick={AddNewProducts}>
                         <p className="text-center">Add the products</p>
                     </div>
 
                 </div>
             </div>
-            
+
             <div>
                 <p className="text-xl text-black font-roboto">Description: </p>
                 <p className="font-roboto text-black w-fit">{ReduxProducts.description}</p>
