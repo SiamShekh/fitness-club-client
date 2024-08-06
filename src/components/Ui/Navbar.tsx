@@ -1,11 +1,9 @@
 import { NavLink } from "react-router-dom";
 import icon from "../../assets/icon/icon.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { carts } from "../../reduxs/slice/CartsShowSlice";
-import { AppRoot } from "../../reduxs/store/Store";
 const Navbar = () => {
     const dispatch = useDispatch();
-    const show_carts= useSelector((state: AppRoot)=> state.Carts.show_carts);
     return (
         <div className="border-b border-gray-300 h-fit fixed w-full backdrop-blur-lg z-50">
             <div className="max-w-[1200px] mx-auto h-[15vh] relative flex items-center justify-between">
@@ -39,7 +37,7 @@ const Navbar = () => {
                         <img src={icon} className="h-[12vh]" />
                     </div>
 
-                    <div className="navbar-center  hidden lg:flex">
+                    <div className="navbar-end  hidden lg:flex">
 
                         <ul className="menu menu-horizontal px-1">
                             <li><NavLink to={"/"}>Home</NavLink></li>
@@ -49,13 +47,6 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    <div className="items-center gap-5 navbar-end hidden md:flex">
-                        <label className="input input-bordered outline-none flex items-center gap-2">
-                            <input type="text" className="grow" placeholder="Search" />
-                            <kbd className="kbd kbd-sm">⌘</kbd>
-                            <kbd className="kbd kbd-sm">K</kbd>
-                        </label>
-                    </div>
 
                 </div>
             </div>

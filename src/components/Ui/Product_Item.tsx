@@ -1,25 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 
 
-export interface TProducts {
-    data: {
-        _id: string,
-        name: string,
-        price: string,
-        category: string,
-        description: string,
-        review?: [
-            string
-        ],
-        discount: number,
-        stock: number,
-        thumnail: string,
-        image: [string],
-        isDelete: boolean
-    }
-}
-
-const Product_Item = ({ data }: TProducts) => {
+const Product_Item = ({ data }: any) => {
 
     return (
         <div className="rounded-md relative bg-gray-200 p-3">

@@ -6,6 +6,7 @@ import Product_Details from "../pages/Product_Details";
 import Checkouts from "../pages/Checkouts";
 import ProductMangement from "../pages/ProductMangement";
 import DraftProduct_Details from "../pages/DraftProduct_Details";
+import About from "../pages/About";
 
 const MainRoutes = createBrowserRouter([
     {
@@ -27,7 +28,11 @@ const MainRoutes = createBrowserRouter([
             {
                 path: 'checkout',
                 element: <Checkouts />
-            }
+            },
+            {
+                path: 'about',
+                element: <About />
+            },
         ],
     },
     {

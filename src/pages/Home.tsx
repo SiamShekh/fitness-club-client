@@ -3,10 +3,15 @@ import dumbbells_3d from "../assets/image/dumbbells_3d icon.webp";
 import cube_icon from "../assets/icon/cube_icon.png";
 import dumbbells_image from "../assets/image/dumbbells_image.png";
 import cxercise_bike from "../assets/image/cxercise_bike.webp";
+import home_gym from "../assets/image/home_gym.webp";
+import fitness from "../assets/image/fitness.webp";
 import Product_Item from "../components/Ui/Product_Item";
 import { Link } from "react-router-dom";
+import { useGetProductsListQuery } from "../reduxs/api/ProductEndpoints";
 
 const Home = () => {
+    const { data } = useGetProductsListQuery(undefined);
+
     return (
         <div className="px-5 pt-5 overflow-hidden">
             {/* Hero: Hero about the site */}
@@ -20,7 +25,7 @@ const Home = () => {
                         <div className="flex items-center gap-4 lg:justify-start justify-center">
                             <Link to={'/products'} className="lg:px-7 px-3 py-3 bg-black text-white lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Explore</Link>
 
-                            <button className="lg:px-7 px-3 py-3 border-2 border-black text-black lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Shop Now</button>
+                            <Link to={'/products'} className="lg:px-7 px-3 py-3 border-2 border-black text-black lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Shop Now</Link>
                         </div>
                     </div>
                     <div className="flex-1">
@@ -70,14 +75,13 @@ const Home = () => {
 
                     <div className="flex justify-between items-center">
                         <p className="text-3xl font-bold text-black font-roboto">Our Best Seller</p>
-                        <p className="text-xs font-bold text-black font-roboto">View all</p>
+                        <Link to={'/products'} className="text-xs font-bold text-black font-roboto">View all</Link>
                     </div>
 
                     <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-5 mt-5">
-                        <Product_Item />
-                        <Product_Item />
-                        <Product_Item />
-                        <Product_Item />
+                        {
+                            data?.data.slice(0, 4)?.map((item: { _id: string; name: string; price: string; category: string; description: string; review?: [string]; discount: number; stock: number; thumnail: string; image: [string]; isDelete: boolean; }) => <Product_Item data={item} />)
+                        }
                     </div>
 
                 </div>
@@ -106,13 +110,13 @@ const Home = () => {
 
                         <div className="relative w-full flex justify-center items-center h-[60vh]">
                             <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Home Gym</p>
-                            <img src={dumbbells_image} className="w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0 z-0" />
+                            <img src={home_gym} className="w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0 z-0" />
                             <div className="w-full h-full bg-gradient-to-t from-black to-transparent object-cover absolute top-0 left-0 z-0 right-0 bottom-0" />
                         </div>
 
                         <div className="relative w-full flex justify-center items-center h-[60vh]">
                             <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Fitness</p>
-                            <img src={dumbbells_image} className="w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0 z-0" />
+                            <img src={fitness} className="w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0 z-0" />
                             <div className="w-full h-full bg-gradient-to-t from-black to-transparent object-cover absolute top-0 left-0 z-0 right-0 bottom-0" />
                         </div>
                     </div>

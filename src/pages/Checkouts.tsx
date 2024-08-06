@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateOrderMutation } from "../reduxs/api/OrderEndpoints";
@@ -8,7 +9,7 @@ const Checkouts = () => {
     const { register, handleSubmit } = useForm();
     const [triggerCheckout] = useCreateOrderMutation();
     const [isComepelete, setComepelete] = useState(false);
-    const HandleCheckOut = async (e) => {
+    const HandleCheckOut = async (e: any) => {
         const payload = {
             name: e.name,
             email: e.email,

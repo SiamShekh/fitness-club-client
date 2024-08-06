@@ -23,7 +23,7 @@ const ProductMangement = () => {
     return (
         <div className="max-w-[1200px] mx-auto relative min-h-[85vh]">
 
-            <div className="flex justify-between items-center my-5">
+            <div className="flex justify-between items-center flex-col md:flex-row px-5 my-5">
                 <p className="font-poppin text-black">{data?.data?.length} items found</p>
                 <div>
                     <input type="text" className="border rounded-full px-7 py-2 border-black text-black" name="search" id="search" placeholder="Search" value={searchTerm} onChange={(e) => setsearchTerm(e.target.value)} />

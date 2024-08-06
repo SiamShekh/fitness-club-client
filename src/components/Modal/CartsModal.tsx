@@ -1,13 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux";
 import { carts } from "../../reduxs/slice/CartsShowSlice";
 import { AppRoot } from "../../reduxs/store/Store";
 import { Link } from "react-router-dom";
-import { TCartSlice } from "../interface/interface";
 import { RemoveSingleCarts } from "../../reduxs/slice/CartsSlice";
 
 const CartsModal = () => {
     const dispatch = useDispatch();
-    const show_carts = useSelector((state: AppRoot) => state.Carts.show_carts);
     const cart = useSelector((state: AppRoot) => state.persistedCart.cart)
     return (
         <div>
@@ -15,7 +14,7 @@ const CartsModal = () => {
                 <div className="modal-box text-black border-black border-2">
                     <h3 className="font-bold text-lg">Carts</h3>
                     {
-                        cart?.map((item: TCartSlice, index) => <div className="py-4">
+                        cart?.map((item: any, index) => <div className="py-4">
                             <div className="flex items-center justify-between" key={index}>
                                 <div className="">
                                     <img src={item.thumbnails} className="size-20 rounded-md" />
