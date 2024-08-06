@@ -14,3 +14,11 @@ export interface TProducts {
     image: [string],
     isDelete: boolean
 }
+
+export interface TCartSlice {
+    _id: string,
+    name: string,
+    price: number,
+    quantity: string,
+    thumbnails: string
+}

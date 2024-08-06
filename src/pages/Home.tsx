@@ -4,6 +4,7 @@ import cube_icon from "../assets/icon/cube_icon.png";
 import dumbbells_image from "../assets/image/dumbbells_image.png";
 import cxercise_bike from "../assets/image/cxercise_bike.webp";
 import Product_Item from "../components/Ui/Product_Item";
+import { Link } from "react-router-dom";
 
 const Home = () => {
     return (
@@ -17,7 +18,7 @@ const Home = () => {
                             <span className="text-black lg:text-xl font-light text-xs font-roboto block">Discover a wide range of high-quality fitness equipment and accessories to help you achieve your goals.</span>
                         </p>
                         <div className="flex items-center gap-4 lg:justify-start justify-center">
-                            <button className="lg:px-7 px-3 py-3 bg-black text-white lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Explore</button>
+                            <Link to={'/products'} className="lg:px-7 px-3 py-3 bg-black text-white lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Explore</Link>
 
                             <button className="lg:px-7 px-3 py-3 border-2 border-black text-black lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Shop Now</button>
                         </div>
@@ -58,7 +59,7 @@ const Home = () => {
                     </div>
 
                     <div className="flex justify-center items-center mt-5">
-                        <p className="px-7 py-2 text-black font-poppin text-xl border-2 border-black">Shop</p>
+                        <Link to={'/products'} className="px-7 py-2 text-black font-poppin text-xl border-2 border-black">Shop</Link>
                     </div>
                 </div>
             </div>
@@ -92,25 +93,25 @@ const Home = () => {
 
                     <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-3">
                         <div className="relative w-full flex justify-center items-center h-[60vh]">
-                            <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Dumbbells</p>
+                            <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Cardio</p>
                             <img src={dumbbells_image} className="w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0 z-0" />
                             <div className="w-full h-full bg-gradient-to-t from-black to-transparent object-cover absolute top-0 left-0 z-0 right-0 bottom-0" />
                         </div>
 
                         <div className="relative w-full flex justify-center items-center h-[60vh]">
-                            <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Dumbbells</p>
+                            <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Strength Training</p>
                             <img src={cxercise_bike} className="w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0 z-0" />
                             <div className="w-full h-full bg-gradient-to-t from-black to-transparent object-cover absolute top-0 left-0 z-0 right-0 bottom-0" />
                         </div>
 
                         <div className="relative w-full flex justify-center items-center h-[60vh]">
-                            <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Dumbbells</p>
+                            <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Home Gym</p>
                             <img src={dumbbells_image} className="w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0 z-0" />
                             <div className="w-full h-full bg-gradient-to-t from-black to-transparent object-cover absolute top-0 left-0 z-0 right-0 bottom-0" />
                         </div>
 
                         <div className="relative w-full flex justify-center items-center h-[60vh]">
-                            <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Dumbbells</p>
+                            <p className="text-2xl font-poppin font-bold text-white z-10 text-center relative w-full">Fitness</p>
                             <img src={dumbbells_image} className="w-full h-full object-cover absolute top-0 left-0 right-0 bottom-0 z-0" />
                             <div className="w-full h-full bg-gradient-to-t from-black to-transparent object-cover absolute top-0 left-0 z-0 right-0 bottom-0" />
                         </div>
@@ -155,9 +156,9 @@ const Home = () => {
                                 Regular physical activity can improve your muscle strength and boost your endurance. Exercise sends oxygen and nutrients to your tissues and helps your cardiovascular system work more efficiently. And when your heart and lung health improve, you have more energy to tackle daily chores.</span>
                         </p>
                         <div className="flex items-center gap-4 lg:justify-start justify-center">
-                            <button className="lg:px-7 px-3 py-3 bg-black text-white lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Explore</button>
+                            <Link to={'/products'} className="lg:px-7 px-3 py-3 bg-black text-white lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Explore</Link>
 
-                            <button className="lg:px-7 px-3 py-3 border-2 border-black text-black lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Shop Now</button>
+                            <Link to={'/products'} className="lg:px-7 px-3 py-3 border-2 border-black text-black lg:mx-0 w-fit rounded-lg font-roboto font-semibold text-xl mt-5">Shop Now</Link>
                         </div>
                     </div>
                     <div className="flex-1">

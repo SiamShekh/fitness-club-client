@@ -1,11 +1,50 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useCreateOrderMutation } from "../reduxs/api/OrderEndpoints";
+import { Link } from "react-router-dom";
 
 const Checkouts = () => {
     const [billing, setBilling] = useState(false);
+    const { register, handleSubmit } = useForm();
+    const [triggerCheckout] = useCreateOrderMutation();
+    const [isComepelete, setComepelete] = useState(false);
+    const HandleCheckOut = async (e) => {
+        const payload = {
+            name: e.name,
+            email: e.email,
+            phone: e.phone,
+            shiping: {
+                street_address: e.shipping_address,
+                city: e.shipping_city,
+                state: e.shipping_state,
+                postal: e.shipping_postal,
+                country: e.shipping_country
+            },
+            billing: {
+                street_address: e.billing_address || e.shipping_address,
+                city: e.billing_city || e.shipping_city,
+                state: e.billing_state || e.shipping_state,
+                postal: e.billing_postal || e.shipping_postal,
+                country: e.billing_country || e.shipping_country
+            }
+        }
+        await triggerCheckout(payload);
+        setComepelete(true);
+    }
 
     return (
         <div className="max-w-[1200px] mx-auto py-10">
-            <form action="">
+            {
+                isComepelete &&
+                <dialog id="my_modal_1" open className="modal">
+                    <div className="modal-box border border-black bg-transparent backdrop-blur-lg bg-white bg-opacity-10 text-black">
+                        <h3 className="font-bold text-lg">Order Created!</h3>
+                        <p className="py-4">New Order was created and stored the data into database.</p>
+                        <Link to={'/products'} className="border border-black rounded-xl bg-opacity-40 backdrop-blur-sm px-5 py-2">Close</Link>
+                    </div>
+                </dialog>
+            }
+            <form onSubmit={handleSubmit(HandleCheckOut)}>
                 <div className="my-3">
                     <p className="text-2xl font-poppin font-bold text-black">Personal Information</p>
 
@@ -20,7 +59,7 @@ const Checkouts = () => {
                                 </svg>
 
 
-                                <input type="text" placeholder="Full Name" className="grow" />
+                                <input type="text" placeholder="Full Name" {...register('name', { required: true })} className="grow" />
                             </label>
                         </label>
 
@@ -35,7 +74,7 @@ const Checkouts = () => {
 
 
 
-                                <input type="text" placeholder="Email Address" className="grow" />
+                                <input type="text" placeholder="Email Address" {...register('email', { required: true })} className="grow" />
                             </label>
                         </label>
 
@@ -50,7 +89,7 @@ const Checkouts = () => {
 
 
 
-                                <input type="number" placeholder="Phone Number" className="grow" />
+                                <input type="number" placeholder="Phone Number" {...register('phone', { required: true })} className="grow" />
                             </label>
                         </label>
                     </div>
@@ -66,7 +105,7 @@ const Checkouts = () => {
                                     <path d="M3 11.83V12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-.17c-.313.11-.65.17-1 .17H4c-.35 0-.687-.06-1-.17Z" />
                                 </svg>
 
-                                <input type="text" placeholder="Street Address" className="grow" />
+                                <input type="text" placeholder="Street Address" {...register('shipping_address', { required: true })} className="grow" />
                             </label>
                         </label>
 
@@ -77,7 +116,7 @@ const Checkouts = () => {
                                     <path fillRule="evenodd" d="M7.605 2.112a.75.75 0 0 1 .79 0l5.25 3.25A.75.75 0 0 1 13 6.707V12.5h.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H3V6.707a.75.75 0 0 1-.645-1.345l5.25-3.25ZM4.5 8.75a.75.75 0 0 1 1.5 0v3a.75.75 0 0 1-1.5 0v-3ZM8 8a.75.75 0 0 0-.75.75v3a.75.75 0 0 0 1.5 0v-3A.75.75 0 0 0 8 8Zm2 .75a.75.75 0 0 1 1.5 0v3a.75.75 0 0 1-1.5 0v-3ZM8 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clipRule="evenodd" />
                                 </svg>
 
-                                <input type="text" placeholder="City" className="grow" />
+                                <input type="text" placeholder="City" {...register('shipping_city', { required: true })} className="grow" />
                             </label>
                         </label>
 
@@ -88,7 +127,7 @@ const Checkouts = () => {
                                     <path fillRule="evenodd" d="M3.75 2a.75.75 0 0 0 0 1.5H4v9h-.25a.75.75 0 0 0 0 1.5H6a.5.5 0 0 0 .5-.5v-3A.5.5 0 0 1 7 10h2a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h2.25a.75.75 0 0 0 0-1.5H12v-9h.25a.75.75 0 0 0 0-1.5h-8.5ZM6.5 4a.5.5 0 0 0-.5.5V5a.5.5 0 0 0 .5.5H7a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 7 4h-.5ZM6 7a.5.5 0 0 1 .5-.5H7a.5.5 0 0 1 .5.5v.5A.5.5 0 0 1 7 8h-.5a.5.5 0 0 1-.5-.5V7Zm3-3a.5.5 0 0 0-.5.5V5a.5.5 0 0 0 .5.5h.5A.5.5 0 0 0 10 5v-.5a.5.5 0 0 0-.5-.5H9Zm-.5 3a.5.5 0 0 1 .5-.5h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5H9a.5.5 0 0 1-.5-.5V7Z" clipRule="evenodd" />
                                 </svg>
 
-                                <input type="number" placeholder="State/Province/Region" className="grow" />
+                                <input type="text" {...register('shipping_state', { required: true })} placeholder="State/Province/Region" className="grow" />
                             </label>
                         </label>
                     </div>
@@ -101,7 +140,7 @@ const Checkouts = () => {
                                     </svg>
 
 
-                                    <input type="text" placeholder="Postal/ZIP Code" className="grow" />
+                                    <input type="text" placeholder="Postal/ZIP Code" {...register('shipping_postal', { required: true })} className="grow" />
                                 </label>
                             </label>
 
@@ -114,7 +153,7 @@ const Checkouts = () => {
                                     </svg>
 
 
-                                    <input type="text" placeholder="Country" className="grow" />
+                                    <input type="text" placeholder="Country" {...register('shipping_country', { required: true })} className="grow" />
                                 </label>
                             </label>
 
@@ -142,7 +181,7 @@ const Checkouts = () => {
                                             <path d="M3 11.83V12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-.17c-.313.11-.65.17-1 .17H4c-.35 0-.687-.06-1-.17Z" />
                                         </svg>
 
-                                        <input type="text" placeholder="Street Address" className="grow" />
+                                        <input type="text" {...register('billing_street', { required: true })} placeholder="Street Address" className="grow" />
                                     </label>
                                 </label>
 
@@ -153,7 +192,7 @@ const Checkouts = () => {
                                             <path fillRule="evenodd" d="M7.605 2.112a.75.75 0 0 1 .79 0l5.25 3.25A.75.75 0 0 1 13 6.707V12.5h.25a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1 0-1.5H3V6.707a.75.75 0 0 1-.645-1.345l5.25-3.25ZM4.5 8.75a.75.75 0 0 1 1.5 0v3a.75.75 0 0 1-1.5 0v-3ZM8 8a.75.75 0 0 0-.75.75v3a.75.75 0 0 0 1.5 0v-3A.75.75 0 0 0 8 8Zm2 .75a.75.75 0 0 1 1.5 0v3a.75.75 0 0 1-1.5 0v-3ZM8 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clipRule="evenodd" />
                                         </svg>
 
-                                        <input type="text" placeholder="City" className="grow" />
+                                        <input type="text" {...register('billing_city', { required: true })} placeholder="City" className="grow" />
                                     </label>
                                 </label>
 
@@ -164,7 +203,7 @@ const Checkouts = () => {
                                             <path fillRule="evenodd" d="M3.75 2a.75.75 0 0 0 0 1.5H4v9h-.25a.75.75 0 0 0 0 1.5H6a.5.5 0 0 0 .5-.5v-3A.5.5 0 0 1 7 10h2a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h2.25a.75.75 0 0 0 0-1.5H12v-9h.25a.75.75 0 0 0 0-1.5h-8.5ZM6.5 4a.5.5 0 0 0-.5.5V5a.5.5 0 0 0 .5.5H7a.5.5 0 0 0 .5-.5v-.5A.5.5 0 0 0 7 4h-.5ZM6 7a.5.5 0 0 1 .5-.5H7a.5.5 0 0 1 .5.5v.5A.5.5 0 0 1 7 8h-.5a.5.5 0 0 1-.5-.5V7Zm3-3a.5.5 0 0 0-.5.5V5a.5.5 0 0 0 .5.5h.5A.5.5 0 0 0 10 5v-.5a.5.5 0 0 0-.5-.5H9Zm-.5 3a.5.5 0 0 1 .5-.5h.5a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5H9a.5.5 0 0 1-.5-.5V7Z" clipRule="evenodd" />
                                         </svg>
 
-                                        <input type="number" placeholder="State/Province/Region" className="grow" />
+                                        <input type="text" {...register('billing_state', { required: true })} placeholder="State/Province/Region" className="grow" />
                                     </label>
                                 </label>
                             </div>
@@ -177,7 +216,7 @@ const Checkouts = () => {
                                             </svg>
 
 
-                                            <input type="text" placeholder="Postal/ZIP Code" className="grow" />
+                                            <input type="text" {...register('billing_postal', { required: true })} placeholder="Postal/ZIP Code" className="grow" />
                                         </label>
                                     </label>
 
@@ -190,7 +229,7 @@ const Checkouts = () => {
                                             </svg>
 
 
-                                            <input type="text" placeholder="Country" className="grow" />
+                                            <input type="text" {...register('billing_country', { required: true })} placeholder="Country" className="grow" />
                                         </label>
                                     </label>
 
@@ -200,7 +239,7 @@ const Checkouts = () => {
                     }
                 </div>
 
-                <button className="w-full bg-black text-white p-3 skew-x-12">Checkouts</button>
+                <button className="w-full bg-black text-white p-3 skew-x-12" type="submit">Checkouts</button>
             </form>
         </div>
     );

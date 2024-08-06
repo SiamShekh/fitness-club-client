@@ -4,8 +4,6 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { useAddProductsMutation } from "../reduxs/api/ProductEndpoints";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import Toastify from "../utils/Toastify";
 import { deleteProducts } from "../reduxs/slice/CreateProductSlice";
 const DraftProduct_Details = () => {
     const ReduxProducts = useSelector((state: AppRoot) => state.persistedProduct);

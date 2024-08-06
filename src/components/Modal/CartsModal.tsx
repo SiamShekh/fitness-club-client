@@ -1,56 +1,43 @@
+import { useDispatch, useSelector } from "react-redux";
+import { carts } from "../../reduxs/slice/CartsShowSlice";
+import { AppRoot } from "../../reduxs/store/Store";
+import { Link } from "react-router-dom";
+import { TCartSlice } from "../interface/interface";
+import { RemoveSingleCarts } from "../../reduxs/slice/CartsSlice";
 
 const CartsModal = () => {
-
+    const dispatch = useDispatch();
+    const show_carts = useSelector((state: AppRoot) => state.Carts.show_carts);
+    const cart = useSelector((state: AppRoot) => state.persistedCart.cart)
     return (
         <div>
             <dialog id="my_modal_5" open className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box text-black">
+                <div className="modal-box text-black border-black border-2">
                     <h3 className="font-bold text-lg">Carts</h3>
-                    <div className="py-4">
-                        <div className="flex items-center justify-between">
-                            <div className="">
-                                <img src="https://chaldn.com/_mpimage/taddy-bear-galice-soft-toy-1-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D84390&q=best&v=1" className="size-20" />
-                            </div>
-                            <div className="flex gap-5">
-                                <div>
-                                    <p className="font-roboto text-xl">Asgaard sofa</p>
-                                    <p className="font-roboto text-xl">{"1 X "} <span className="text-blue-900">$55</span></p>
+                    {
+                        cart?.map((item: TCartSlice, index) => <div className="py-4">
+                            <div className="flex items-center justify-between" key={index}>
+                                <div className="">
+                                    <img src={item.thumbnails} className="size-20 rounded-md" />
                                 </div>
-                                <button className="btn">X</button>
+                                <div className="flex gap-5">
+                                    <div>
+                                        <p className="font-roboto text-xl">{item?.name}</p>
+                                        <p className="font-roboto text-xl">{item?.quantity} X <span className="text-blue-900">${item?.price}</span></p>
+                                    </div>
+                                    <button className="btn" onClick={()=> {
+                                        dispatch(RemoveSingleCarts(item._id))
+                                    }}>X</button>
+                                </div>
                             </div>
-                        </div>
+                        </div>)
+                    }
 
-                        <div className="flex items-center justify-between">
-                            <div className="">
-                                <img src="https://chaldn.com/_mpimage/taddy-bear-galice-soft-toy-1-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D84390&q=best&v=1" className="size-20" />
-                            </div>
-                            <div className="flex gap-5">
-                                <div>
-                                    <p className="font-roboto text-xl">Asgaard sofa</p>
-                                    <p className="font-roboto text-xl">{"1 X "} <span className="text-blue-900">$55</span></p>
-                                </div>
-                                <button className="btn">X</button>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                            <div className="">
-                                <img src="https://chaldn.com/_mpimage/taddy-bear-galice-soft-toy-1-pcs?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D84390&q=best&v=1" className="size-20" />
-                            </div>
-                            <div className="flex gap-5">
-                                <div>
-                                    <p className="font-roboto text-xl">Asgaard sofa</p>
-                                    <p className="font-roboto text-xl">{"1 X "} <span className="text-blue-900">$55</span></p>
-                                </div>
-                                <button className="btn">X</button>
-                            </div>
-                        </div>
-                    </div>
                     <div className="modal-action">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
-                            <button className="btn  bg-blue-700 text-white">Checkout</button>
-                            <button className="btn">Close</button>
+                            <Link to={'/checkout'} onClick={() => dispatch(carts(false))} className="btn  bg-blue-700 text-white">Checkout</Link>
+                            <button className="btn" onClick={() => dispatch(carts(false))}>Close</button>
                         </form>
                     </div>
                 </div>

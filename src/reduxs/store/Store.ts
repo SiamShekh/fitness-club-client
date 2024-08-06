@@ -10,6 +10,8 @@ import {
 } from "redux-persist";
 import CreateProductSlice from "../slice/CreateProductSlice";
 import { BaseApi } from "../api/BaseApi";
+import CartsShowSlice from "../slice/CartsShowSlice";
+import CartsSlice from "../slice/CartsSlice";
 
 const persistConfig = {
     key: "root",
@@ -17,11 +19,13 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, CreateProductSlice);
-
+const persistedCart = persistReducer(persistConfig, CartsSlice.reducer);
 export const ReduxStore = configureStore({
     reducer: {
         "persistedProduct": persistedReducer,
-        [BaseApi.reducerPath]: BaseApi.reducer
+        [BaseApi.reducerPath]: BaseApi.reducer,
+        'Carts': CartsShowSlice.reducer,
+        "persistedCart": persistedCart,
     },
     middleware: (getDefaultMiddlewars) => getDefaultMiddlewars({
         serializableCheck: {
